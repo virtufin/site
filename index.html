@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Virtufin — A digital twin for your financial stack. Mirror every trade, stream, and exchange in a live, event-driven simulation.">
+<meta name="color-scheme" content="dark">
+<title>Virtufin — Digital twin for financial systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #080c14;
+  --bg2: #0e1320;
+  --bg3: #141a2a;
+  --text: #e2e8f0;
+  --text-muted: #8892b0;
+  --teal: #3c9adb;
+  --teal-glow: rgba(60, 154, 219, 0.25);
+  --cyan: #5eead4;
+  --navy: #127cca;
+  --deep: #2056ae;
+  --border: rgba(60, 154, 219, 0.12);
+  --radius: 12px;
+  --max-w: 1100px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(60, 154, 219, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 85% 70%, rgba(18, 124, 202, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(32, 86, 174, 0.03) 0%, transparent 70%);
+  background-attachment: fixed;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(60, 154, 219, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+section, header, footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- NAV ---------- */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 28px 40px 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.logo svg {
+  filter: drop-shadow(0 0 18px var(--teal-glow));
+}
+
+.logo span {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 400;
+  transition: color 0.2s;
+  letter-spacing: 0.01em;
+}
+
+.nav-links a:hover {
+  color: var(--teal);
+}
+
+.nav-cta {
+  background: linear-gradient(135deg, var(--teal), var(--navy));
+  color: #fff !important;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: 500 !important;
+  font-size: 0.85rem !important;
+  transition: box-shadow 0.3s !important;
+}
+
+.nav-cta:hover {
+  box-shadow: 0 0 24px var(--teal-glow);
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 100px 40px 80px;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 6px 18px 6px 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--teal);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  animation: fadeIn 0.8s ease;
+}
+
+.hero-badge .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+  animation: pulse-dot 2s infinite;
+}
+
+.hero h1 {
+  font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  animation: fadeIn 0.8s ease 0.1s both;
+}
+
+.hero h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, var(--teal) 20%, var(--cyan) 80%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 0 auto 40px;
+  font-weight: 350;
+  line-height: 1.65;
+  animation: fadeIn 0.8s ease 0.2s both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeIn 0.8s ease 0.3s both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, var(--teal), var(--navy));
+  color: #fff;
+  padding: 14px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  transition: box-shadow 0.3s, transform 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 36px var(--teal-glow);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--teal);
+  padding: 14px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border: 1px solid var(--border);
+  letter-spacing: 0.01em;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.btn-secondary:hover {
+  border-color: var(--teal);
+  background: rgba(60, 154, 219, 0.06);
+}
+
+/* ---------- DIVIDER ---------- */
+.divider {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 40px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+}
+
+/* ---------- SECTION COMMON ---------- */
+.section {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 100px 40px;
+}
+
+.section-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 16px;
+}
+
+.section h2 {
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.section > p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  max-width: 580px;
+  margin-bottom: 48px;
+  font-weight: 350;
+}
+
+/* ---------- PROBLEM ---------- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px 28px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  border-color: rgba(60, 154, 219, 0.3);
+  box-shadow: 0 4px 30px rgba(60, 154, 219, 0.06);
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--teal);
+}
+
+.card h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.card p {
+  color: var(--text-muted);
+  font-size: 0.93rem;
+  line-height: 1.6;
+  font-weight: 350;
+}
+
+/* ---------- SOLUTION ---------- */
+.solution-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.solution-visual {
+  position: relative;
+  height: 320px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.twin-container {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.twin-box {
+  width: 120px;
+  height: 180px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.twin-box.production {
+  border-color: rgba(94, 234, 212, 0.3);
+  box-shadow: 0 0 30px rgba(94, 234, 212, 0.08);
+}
+
+.twin-box.simulation {
+  border-color: rgba(60, 154, 219, 0.3);
+  box-shadow: 0 0 30px rgba(60, 154, 219, 0.08);
+}
+
+.twin-box .box-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.twin-box.production .box-label { color: var(--cyan); }
+.twin-box.simulation .box-label { color: var(--teal); }
+
+.twin-arrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-direction: column;
+}
+
+.twin-arrow .line {
+  width: 60px;
+  height: 1px;
+  background: var(--border);
+}
+
+.twin-arrow .line-top { background: linear-gradient(90deg, var(--cyan), var(--teal)); }
+.twin-arrow .line-bottom { background: linear-gradient(90deg, var(--teal), var(--cyan)); }
+
+.twin-arrow .label {
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.solution-text h3 {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.solution-text p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin-bottom: 16px;
+  font-weight: 350;
+}
+
+.bullet-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bullet-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  font-weight: 350;
+}
+
+.bullet-list li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  margin-top: 8px;
+  box-shadow: 0 0 8px var(--teal-glow);
+}
+
+/* ---------- CAPABILITIES ---------- */
+.caps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.cap-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.cap-card:hover {
+  border-color: rgba(60, 154, 219, 0.3);
+  box-shadow: 0 4px 30px rgba(60, 154, 219, 0.06);
+}
+
+.cap-num {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+
+.cap-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.cap-card p {
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  font-weight: 350;
+}
+
+/* ---------- CTA ---------- */
+.cta {
+  text-align: center;
+}
+
+.cta h2 {
+  margin-bottom: 8px;
+}
+
+.cta p {
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 32px;
+  font-weight: 350;
+}
+
+/* ---------- FOOTER ---------- */
+footer {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 40px 40px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-left {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.footer-left a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+
+.footer-left a:hover {
+  color: var(--teal);
+}
+
+.footer-right {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; box-shadow: 0 0 10px var(--cyan); }
+  50%      { opacity: 0.5; box-shadow: 0 0 20px var(--cyan); }
+}
+
+.reveal {
+  animation: fadeIn 0.7s ease both;
+  animation-timeline: view();
+  animation-range: entry 15%;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+  nav {
+    padding: 24px 24px 0;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+  }
+
+  .hero {
+    padding: 60px 24px 60px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .section {
+    padding: 60px 24px;
+  }
+
+  .solution-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .solution-visual {
+    height: 240px;
+  }
+
+  .twin-box {
+    width: 90px;
+    height: 140px;
+  }
+
+  .twin-container {
+    gap: 24px;
+  }
+
+  footer {
+    padding: 32px 24px 40px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-left {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="logo" aria-label="Virtufin home">
+    <svg width="36" height="36" viewBox="0 0 2993 2993" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#3c9adb" d="M1596 2394h599v599h-599z"/>
+      <path fill="#3c9adb" d="M1796 798h399v599h-599V998l200-200z"/>
+      <path fill="#3c9adb" d="M1596 1796h200l399-399v599H1596z"/>
+      <path fill="#127cca" d="M798 2394h599v599H798z"/>
+      <path fill="#127cca" d="M798 1995l399-399h399v599H798z"/>
+      <path fill="#2056ae" d="M0 2394h599v599H0zm1197-2393l399 399v399H997L0 2195v-299l898-898h299z"/>
+      <path fill="#83a9de" d="M2394 2195h599v-599h-599zM2394 1397h599V798h-599zm0-798h599V0h-449l-150 150zM2394 2394v599h449l150-149v-450z"/>
+    </svg>
+    <span>Virtufin</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="https://docs.virtufin.com">Docs</a></li>
+    <li><a href="mailto:contact@virtufin.com">Contact</a></li>
+    <li><a href="https://docs.virtufin.com/getting-started/" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <div class="hero-badge">
+    <span class="dot"></span> Now in Open Beta
+  </div>
+  <h1>A <em>digital twin</em> for your financial stack</h1>
+  <p>Mirror every trade, stream, and exchange in a live event-driven simulation. Test strategies against production data — without production risk.</p>
+  <div class="hero-actions">
+    <a href="https://docs.virtufin.com/getting-started/" class="btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Explore the Docs
+    </a>
+    <a href="mailto:contact@virtufin.com" class="btn-secondary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Contact Us
+    </a>
+  </div>
+</header>
+
+<div class="divider" aria-hidden="true"></div>
+
+<section class="section reveal" id="problem">
+  <div class="section-label">The Problem</div>
+  <h2>Trading infrastructure hasn't kept up</h2>
+  <p>Most teams are running a fragile patchwork of vendor services held together by bespoke code and institutional knowledge.</p>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      </div>
+      <h3>Vendor lock-in</h3>
+      <p>Every exchange, broker, and data feed speaks its own protocol. Swapping one means rewriting the integration layer from scratch.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+      </div>
+      <h3>Brittle glue code</h3>
+      <p>The contract between services lives in Slack threads and Postman collections. When the senior dev leaves, the map goes with them.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <h3>Year-long integrations</h3>
+      <p>Adding a new exchange, strategy language, or transport is a six-month project. By the time it ships, the opportunity is gone.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<section class="section reveal" id="solution">
+  <div class="section-label">The Solution</div>
+  <h2>One event stream. Two realities.</h2>
+  <p>The same live market data that drives your production stack also feeds a parallel simulation environment — your digital twin.</p>
+  <div class="solution-grid">
+    <div class="solution-visual">
+      <div class="twin-container">
+        <div class="twin-box production">
+          <span class="box-label">Production</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5eead4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          <span style="font-size:0.6rem;font-weight:600;color:var(--cyan)">Live trades</span>
+        </div>
+        <div class="twin-arrow">
+          <div class="line line-top"></div>
+          <span class="label">Events</span>
+          <div class="line line-bottom"></div>
+        </div>
+        <div class="twin-box simulation">
+          <span class="box-label">Simulation</span>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#3c9adb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span style="font-size:0.6rem;font-weight:600;color:var(--teal)">Backtests</span>
+        </div>
+      </div>
+    </div>
+    <div class="solution-text">
+      <h3>Zero-risk experimentation</h3>
+      <p>Every market event flows through a single pub/sub fabric. Production and simulation are just two addresses on the same stream.</p>
+      <ul class="bullet-list">
+        <li>Replay last month's tape to validate a new strategy</li>
+        <li>Run shadow-mode: compare strategy output against live execution with zero latency impact</li>
+        <li>Swap exchanges or brokers without touching strategy code</li>
+        <li>Every scenario is reproducible, deterministic, and auditable</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<section class="section reveal" id="capabilities">
+  <div class="section-label">Capabilities</div>
+  <h2>Built for scale from day one</h2>
+  <p>Virtufin is not a framework. It's a platform — pluggable, language-agnostic, and governed by a published open specification.</p>
+  <div class="caps-grid">
+    <div class="cap-card">
+      <div class="cap-num">01</div>
+      <h3>Polyglot strategies</h3>
+      <p>Write workers in .NET, Python, C++, or Rust. The platform loads them as binaries — in-process for sub-&micro;s latency, out-of-process for flexibility.</p>
+    </div>
+    <div class="cap-card">
+      <div class="cap-num">02</div>
+      <h3>Exchange-agnostic</h3>
+      <p>Binance, Alpaca, FIX brokers — each is just a WebSocket proxy configuration. Add a new exchange by adding a connection string, not a new service.</p>
+    </div>
+    <div class="cap-card">
+      <div class="cap-num">03</div>
+      <h3>Event replay &amp; backtesting</h3>
+      <p>All inter-service traffic flows as CloudEvents on a Dapr pub/sub bus. Replay any time window against any strategy. The event log is the source of truth.</p>
+    </div>
+    <div class="cap-card">
+      <div class="cap-num">04</div>
+      <h3>Real-time observability</h3>
+      <p>Every order, fill, and signal emits a structured event. OpenTelemetry traces every call through the gateway. No black boxes. No mystery latency.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
+<section class="section cta reveal" id="cta">
+  <h2>Ready to mirror your markets?</h2>
+  <p>Start with the docs, deploy a reference worker, and see your first digital twin in under ten minutes.</p>
+  <div class="hero-actions">
+    <a href="https://docs.virtufin.com/getting-started/" class="btn-primary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Get Started
+    </a>
+    <a href="mailto:contact@virtufin.com" class="btn-secondary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Contact Us
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-left">
+    <a href="https://docs.virtufin.com">Documentation</a>
+    <a href="https://docs.virtufin.com/getting-started/">Get Started</a>
+    <a href="mailto:contact@virtufin.com">contact@virtufin.com</a>
+  </div>
+  <div class="footer-right">&copy; 2026 H&auml;ner Consulting. All Rights Reserved.</div>
+</footer>
+
+</body>
+</html>
