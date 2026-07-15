@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#080c14">
+<meta name="robots" content="noindex">
+<title>Page not found — Virtufin</title>
+<link rel="icon" href="/assets/images/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/assets/images/logo.svg">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #080c14;
+  --text: #e2e8f0;
+  --text-muted: #8892b0;
+  --teal: #3c9adb;
+  --border: rgba(60, 154, 219, 0.12);
+}
+html { background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/inter-var.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+  padding: 24px;
+}
+img { width: 56px; height: 56px; }
+h1 { font-size: 1.6rem; font-weight: 600; }
+p { color: var(--text-muted); max-width: 40ch; }
+a {
+  color: var(--teal);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 22px;
+  margin-top: 8px;
+}
+a:hover { border-color: var(--teal); }
+</style>
+</head>
+<body>
+<img src="/assets/images/logo.svg" alt="">
+<h1>Page not found</h1>
+<p>The page you're looking for doesn't exist or has moved.</p>
+<a href="/">Back to virtufin.com</a>
+</body>
+</html>
