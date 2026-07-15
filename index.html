@@ -664,6 +664,7 @@ footer {
   <div class="hero-badge">
     <span class="dot"></span> Now in Beta
   </div>
+  <p style="color:var(--text-muted);font-size:0.78rem;margin-top:-16px;margin-bottom:32px;font-weight:400;">Core pub/sub and API gateway are stable. Strategy DSL and advanced backtesting UI are in active development.</p>
   <h1>A <em>digital twin</em> for your financial stack</h1>
   <p>Mirror every trade, stream, and exchange in a live event-driven simulation. Test strategies against production data — without production risk.</p>
   <div class="hero-actions">
@@ -680,6 +681,14 @@ footer {
 
 <div class="divider" aria-hidden="true"></div>
 
+<section class="section reveal" id="who-for">
+  <div class="section-label">Who This Is For</div>
+  <h2>For teams that build their own strategies</h2>
+  <p>Quantitative developers and small trading firms who write their own algorithms — and are tired of rebuilding exchange integrations, stitching together vendor tools, and maintaining parallel production and backtest stacks.</p>
+</section>
+
+<div class="divider" aria-hidden="true"></div>
+
 <section class="section reveal" id="problem">
   <div class="section-label">The Problem</div>
   <h2>Trading infrastructure hasn't kept up</h2>
@@ -690,21 +699,21 @@ footer {
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
       </div>
       <h3>Vendor lock-in</h3>
-      <p>Every exchange, broker, and data feed speaks its own protocol. Swapping one means rewriting the integration layer from scratch.</p>
+      <p>Every exchange, broker, and data feed speaks its own protocol. With Virtufin, one WebSocket configuration swaps an exchange — minutes, not months.</p>
     </div>
     <div class="card">
       <div class="card-icon">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
       </div>
       <h3>Brittle glue code</h3>
-      <p>The contract between services lives in Slack threads and Postman collections. When the senior dev leaves, the map goes with them.</p>
+      <p>The contract between services lives in Slack threads and Postman collections. Virtufin bakes the contract into a published specification — every service knows the rules.</p>
     </div>
     <div class="card">
       <div class="card-icon">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       </div>
       <h3>Year-long integrations</h3>
-      <p>Adding a new exchange, strategy language, or transport is a six-month project. By the time it ships, the opportunity is gone.</p>
+      <p>Adding a new exchange, strategy language, or transport is a six-month project. Virtufin makes it a configuration change. The platform handles the rest.</p>
     </div>
   </div>
 </section>
@@ -737,7 +746,7 @@ footer {
     </div>
     <div class="solution-text">
       <h3>Zero-risk experimentation</h3>
-      <p>Every market event flows through a single pub/sub fabric. Production and simulation are just two addresses on the same stream.</p>
+      <p>Every market event flows through a single pub/sub fabric. Events are tagged with a lane — <code>act</code> for live production, <code>hyp</code> for hypothetical simulation — so production and backtest data never collide.</p>
       <ul class="bullet-list">
         <li>Replay last month's tape to validate a new strategy</li>
         <li>Run shadow-mode: compare strategy output against live execution with zero latency impact</li>
@@ -763,7 +772,7 @@ footer {
     <div class="cap-card">
       <div class="cap-num">02</div>
       <h3>Exchange-agnostic</h3>
-      <p>Binance, Alpaca, FIX brokers — each is just a WebSocket proxy configuration. Add a new exchange by adding a connection string, not a new service.</p>
+      <p>Binance, Alpaca, and any WebSocket-based data feed — each is just a proxy configuration. Add an exchange by adding a connection string. FIX session-based brokers are supported with the same proxy model.</p>
     </div>
     <div class="cap-card">
       <div class="cap-num">03</div>
@@ -783,6 +792,7 @@ footer {
 <section class="section cta reveal" id="cta">
   <h2>Ready to mirror your markets?</h2>
   <p>Start with the docs, deploy a reference worker, and see your first digital twin in minutes. Docker required.</p>
+  <p style="color:var(--text-muted);font-size:0.85rem;margin-bottom:32px;">See it run: <a href="https://git.haenerconsulting.com/virtufin/virtufin-workers" style="color:var(--teal);">Binance orderbook echo worker</a> and more at virtufin-workers</p>
   <div class="hero-actions">
     <a href="https://docs.virtufin.com/getting-started/" class="btn-primary">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
@@ -801,7 +811,7 @@ footer {
     <a href="https://docs.virtufin.com/getting-started/">Get Started</a>
     <a href="mailto:contact@virtufin.com">contact@virtufin.com</a>
   </div>
-  <div class="footer-right">&copy; 2026 H&auml;ner Consulting. All Rights Reserved.</div>
+  <div class="footer-right">&copy; 2026 H&auml;ner Consulting. All Rights Reserved. &nbsp;&middot;&nbsp; <code>24c1f80</code></div>
 </footer>
 
 </body>
